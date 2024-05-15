@@ -23,11 +23,11 @@ function Header() {
             <CiSearch size={24} className="" />
           </button>
         </div>
-        <div className="cart">
+        <div className="cart cursor-pointer flex flex-col  items-center">
           <BsCart2 />
           <span>Cart</span>
         </div>
-        <div className="cart">
+        <div className="cart cursor-pointer flex flex-col  items-center">
           <MdFavoriteBorder />
           <span>Favorites</span>
         </div>

@@ -5,7 +5,7 @@ import { ProductType } from "@/types/product.types";
 import React, { useEffect } from "react";
 
 function Home({searchQuery}:{
-  searchQuery: any,
+  searchQuery: string ,
 }) {
   const { loading, products, fetchProducts, error } = useProductStore();
 
@@ -33,9 +33,7 @@ function Home({searchQuery}:{
       {loading && <div>Loading...</div>}
       {error && <div>{error}</div>}
       <div className="flex flex-wrap justify-center gap-5">
-        {products.filter((product) =>
-            product.title.toLowerCase().includes(searchQuery)
-          ).map((product: ProductType) => (
+        {products.map((product: ProductType) => (
           <div key={product.id}>
             <div className="">
               <div className="max-w-60 h-[488px] rounded overflow-hidden shadow-lg">

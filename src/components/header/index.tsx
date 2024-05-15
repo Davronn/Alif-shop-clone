@@ -19,13 +19,9 @@ function Header() {
     setSearchQuery(event.target.value);
   };
 
-  const handleKeyPress = (event:any) => {
-    if (event.key === "Enter") {
-      handleSearch();
-    }
-  };
+  
   return (
-    <div className="w-full shadow-slate-700 fixed top-0 bg-white">
+    <div className="w-full shadow-slate-700 fixed top-0 bg-white z-50">
       <header className="flex items-center h-24 container w-full mx-auto justify-center gap-20 ">
         <h1 className="text-2xl">Logo</h1>
         <button className="flex bg-yellow-500 px-5 py-2 rounded-xl">
@@ -39,7 +35,6 @@ function Header() {
             placeholder="Search"
             value={searchQuery}
             onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
           />
           <button
             className="bg-yellow-500 border-yellow-500  px-[18px] py-[10px] pt-[11px]  rounded-e-xl "
@@ -65,7 +60,7 @@ function Header() {
         </p>
       </header>
       <div className="bg-slate-300 w-full h-[2px]"></div>
-      <Home searchQuery={searchQuery} />
+      {/* <Home searchQuery={searchQuery} /> */}
     </div>
   );
 }

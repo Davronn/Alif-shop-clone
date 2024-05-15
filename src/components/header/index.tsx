@@ -1,10 +1,29 @@
-import React from "react";
+"use client"
+
+import Home from "@/app/page";
+import React, { useState } from "react";
 import { BsCart2 } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
 import { FaBars } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 
 function Header() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = () => {
+    // Logic to handle search based on searchQuery
+    console.log("Search for:", searchQuery);
+  };
+
+  const handleInputChange = (event:any) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleKeyPress = (event:any) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
   return (
     <div className="w-full shadow-slate-700 fixed top-0 bg-white">
       <header className="flex items-center h-24 container w-full mx-auto justify-center gap-20 ">
@@ -14,12 +33,18 @@ function Header() {
           <span className="ml-2">Pruducts</span>
         </button>
         <div className="input flex items-center">
-          <input
-            className="border-yellow-500 rounded-s-xl border-2 border-solid py-[9px] px-3 focus:outline-none focus:border-yellow-500 "
+        <input
+            className="border-yellow-500 rounded-s-xl border-2 border-solid py-[9px] px-3 focus:outline-none focus:border-yellow-500"
             type="text"
             placeholder="Search"
+            value={searchQuery}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
           />
-          <button className="bg-yellow-500 border-yellow-500  px-[18px] py-[10px] pt-[11px]  rounded-e-xl ">
+          <button
+            className="bg-yellow-500 border-yellow-500  px-[18px] py-[10px] pt-[11px]  rounded-e-xl "
+            onClick={handleSearch}
+          >
             <CiSearch size={24} className="" />
           </button>
         </div>
@@ -40,6 +65,7 @@ function Header() {
         </p>
       </header>
       <div className="bg-slate-300 w-full h-[2px]"></div>
+      <Home searchQuery={searchQuery} />
     </div>
   );
 }

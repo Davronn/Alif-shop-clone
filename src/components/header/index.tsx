@@ -6,14 +6,15 @@ import { MdFavoriteBorder } from "react-icons/md";
 
 function Header() {
   return (
-    <div>
+    <div className="w-full shadow-slate-700 fixed top-0 bg-white">
+      
       <header
-        className="flex items-center h-24 container w-full mx-auto justify-center gap-24"
+        className="flex items-center h-24 container w-full mx-auto justify-center gap-24 "
       >
         <h1 className="text-2xl">Logo</h1>
-        <button className="flex">
-          <span>Pruducts</span>
+        <button className="flex bg-yellow-500 px-3 py-2 rounded-xl">
           <FaBars size={25} />
+          <span className="ml-2">Pruducts</span>
         </button>
         <div className="input">
           <input type="text" placeholder="Search" />
@@ -32,6 +33,7 @@ function Header() {
         <button>Sign Up</button>
         <p>РУС / UZB</p>
       </header>
+      <div className="bg-slate-300 w-full h-[2px]"></div>
     </div>
   );
 }

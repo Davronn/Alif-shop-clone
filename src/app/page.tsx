@@ -27,7 +27,7 @@ function Home() {
   const defaultImg = "https://i.imgur.com/R2PN9Wq.jpeg"
 
   return (
-    <div>
+    <div className="">
       {loading && <div>Loading...</div>}
       {error && <div>{error}</div>}
       <div className="flex flex-wrap justify-center gap-5">

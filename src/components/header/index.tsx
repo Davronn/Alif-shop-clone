@@ -23,7 +23,7 @@ function Header() {
   return (
     <div className="w-full shadow-slate-700 fixed top-0 bg-white z-50">
       <header className="flex items-center h-24 container w-full mx-auto justify-center gap-20 ">
-        <h1 className="text-2xl">Logo</h1>
+        <img className="w-24" src="https://alifshop.uz/_ipx/s_113x32/images/alifshop-logo.svg" alt="" />
         <button className="flex bg-yellow-500 px-5 py-2 rounded-xl">
           <FaBars size={25} />
           <span className="ml-2">Pruducts</span>

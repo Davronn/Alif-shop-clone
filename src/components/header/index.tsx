@@ -8,17 +8,7 @@ import { FaBars } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 
 function Header() {
-  const [searchQuery, setSearchQuery] = useState("");
   const [cartCount, setCartCount] = useState(0);
-
-  const handleSearch = () => {
-    // Logic to handle search based on searchQuery
-    console.log("Search for:", searchQuery);
-  };
-
-  const handleInputChange = (event: any) => {
-    setSearchQuery(event.target.value);
-  };
 
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
@@ -27,8 +17,6 @@ function Header() {
       setCartCount(products.length);
     }
   }, []);
-
-  console.log(cartCount);
 
   return (
     <div className="w-full shadow-slate-700 fixed top-0 bg-white z-50">
@@ -49,13 +37,8 @@ function Header() {
             className="border-yellow-500 rounded-s-xl border-2 border-solid py-[9px] px-3 focus:outline-none focus:border-yellow-500"
             type="text"
             placeholder="Search"
-            value={searchQuery}
-            onChange={handleInputChange}
           />
-          <button
-            className="bg-yellow-500 border-yellow-500  px-[18px] py-[10px] pt-[11px]  rounded-e-xl "
-            onClick={handleSearch}
-          >
+          <button className="bg-yellow-500 border-yellow-500  px-[18px] py-[10px] pt-[11px]  rounded-e-xl ">
             <CiSearch size={24} className="" />
           </button>
         </div>

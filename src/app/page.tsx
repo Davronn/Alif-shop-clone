@@ -39,9 +39,13 @@ function Home({ searchQuery }: { searchQuery: string }) {
 
   const addToCard = (product: ProductType) => {
     const existingProducts = localStorage.getItem("products");
-    let productsArray: CartProductType[] = existingProducts ? JSON.parse(existingProducts) : [];
+    let productsArray: CartProductType[] = existingProducts
+      ? JSON.parse(existingProducts)
+      : [];
 
-    const existingProductIndex = productsArray.findIndex(p => p.id === product.id);
+    const existingProductIndex = productsArray.findIndex(
+      (p) => p.id === product.id
+    );
 
     if (existingProductIndex !== -1) {
       productsArray[existingProductIndex].quantity += 1;
@@ -50,6 +54,9 @@ function Home({ searchQuery }: { searchQuery: string }) {
     }
 
     localStorage.setItem("products", JSON.stringify(productsArray));
+
+    const event = new Event("cartCountUpdated");
+    window.dispatchEvent(event);
 
     console.log("add to card: " + product.id);
   };

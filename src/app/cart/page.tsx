@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
 import React, { useEffect, useState } from "react";
-import { CartProductType, ProductType } from "@/types/product.types";
+import { CartProductType } from "@/types/product.types";
 
 const Cart = () => {
   const [cartProducts, setCartProducts] = useState<CartProductType[]>([]);
@@ -9,7 +9,9 @@ const Cart = () => {
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
     if (storedProducts) {
-      setCartProducts(JSON.parse(storedProducts));
+      const products = JSON.parse(storedProducts);
+      setCartProducts(products);
+      localStorage.setItem("productSoni", products.length); // Move this line here
     }
   }, []);
 

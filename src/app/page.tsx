@@ -6,7 +6,7 @@ import { CartProductType, ProductType } from "@/types/product.types";
 import React, { useEffect } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 
-function Home({ searchQuery }: { searchQuery: string }) {
+function Home() {
   const { loading, products, fetchProducts, error } = useProductStore();
 
   useEffect(() => {

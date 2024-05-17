@@ -2,7 +2,7 @@
 
 import EmblaCarousel from "@/components/courusel";
 import useProductStore from "@/store/product/productStore";
-import { ProductType } from "@/types/product.types";
+import { CartProductType, ProductType } from "@/types/product.types";
 import React, { useEffect } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 
@@ -37,8 +37,50 @@ function Home({ searchQuery }: { searchQuery: string }) {
     "https://images.unsplash.com/photo-1531525645387-7f14be1bdbbd?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
 
+  const addToCard = (product: ProductType) => {
+    const existingProducts = localStorage.getItem("products");
+    let productsArray: CartProductType[] = existingProducts ? JSON.parse(existingProducts) : [];
+
+    const existingProductIndex = productsArray.findIndex(p => p.id === product.id);
+
+    if (existingProductIndex !== -1) {
+      productsArray[existingProductIndex].quantity += 1;
+    } else {
+      productsArray.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem("products", JSON.stringify(productsArray));
+
+    console.log("add to card: " + product.id);
+  };
+
   return (
     <div className="">
+      <div className="links">
+        <ul className="flex justify-center gap-9  mx-auto">
+          <li className="cursor-pointer text-slate-500 border-white hover:border-slate-700 font-bold border-b-4 hover:border-b-4 py-2 ">
+            Смартфоны и гаджеты
+          </li>
+          <li className="cursor-pointer text-slate-500 border-white hover:border-slate-700 font-bold border-b-4 hover:border-b-4 py-2 ">
+            Ноутбуки и компьютеры
+          </li>
+          <li className="cursor-pointer text-slate-500 border-white hover:border-slate-700 font-bold border-b-4 hover:border-b-4 py-2 ">
+            ТВ и проекторы
+          </li>
+          <li className="cursor-pointer text-slate-500 border-white hover:border-slate-700 font-bold border-b-4 hover:border-b-4 py-2 ">
+            Аудиотехника
+          </li>
+          <li className="cursor-pointer text-slate-500 border-white hover:border-slate-700 font-bold border-b-4 hover:border-b-4 py-2 ">
+            Техника для дома
+          </li>
+          <li className="cursor-pointer text-slate-500 border-white hover:border-slate-700 font-bold border-b-4 hover:border-b-4 py-2 ">
+            Красота и здоровье
+          </li>
+          <li className="cursor-pointer text-slate-500 border-white hover:border-slate-700 font-bold border-b-4 hover:border-b-4 py-2 ">
+            Умный дом
+          </li>
+        </ul>
+      </div>
       <div>
         <EmblaCarousel slides={SLIDES} options={OPTIONS} />
       </div>
@@ -52,7 +94,7 @@ function Home({ searchQuery }: { searchQuery: string }) {
                 <img
                   className="w-full"
                   src={
-                    product.images.length > 2 ? product.images[1] : defaultImg
+                    product.images.length > 2 ? product.images[0] : defaultImg
                   }
                   alt={product.category}
                 />
@@ -66,7 +108,9 @@ function Home({ searchQuery }: { searchQuery: string }) {
                   </p>
                 </div>
                 <button className=" bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-3 rounded-full ml-4 mb-6">
-                  <span className="text-sm">Add to card</span>
+                  <span className="text-sm" onClick={() => addToCard(product)}>
+                    Add to card
+                  </span>
                 </button>
               </div>
             </div>

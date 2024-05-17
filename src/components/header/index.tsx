@@ -1,6 +1,7 @@
 "use client"
 
 import Home from "@/app/page";
+import Link from "next/link";
 import React, { useState } from "react";
 import { BsCart2 } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
@@ -23,7 +24,9 @@ function Header() {
   return (
     <div className="w-full shadow-slate-700 fixed top-0 bg-white z-50">
       <header className="flex items-center h-24 container w-full mx-auto justify-center gap-20 ">
-        <img className="w-24" src="https://alifshop.uz/_ipx/s_113x32/images/alifshop-logo.svg" alt="" />
+        <Link href="/">
+        <img  className="w-28" src="https://alifshop.uz/_ipx/s_113x32/images/alifshop-logo.svg" alt="" />
+        </Link>
         <button className="flex bg-yellow-500 px-5 py-2 rounded-xl">
           <FaBars size={25} />
           <span className="ml-2">Pruducts</span>
@@ -43,10 +46,12 @@ function Header() {
             <CiSearch size={24} className="" />
           </button>
         </div>
-        <div className="cart cursor-pointer flex flex-col  items-center">
+        <Link href="/cart">
+        <div  className="cart cursor-pointer flex flex-col  items-center">
           <BsCart2 />
           <span>Cart</span>
         </div>
+        </Link>
         <div className="cart cursor-pointer flex flex-col  items-center">
           <MdFavoriteBorder />
           <span>Favorites</span>

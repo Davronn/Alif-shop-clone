@@ -12,6 +12,8 @@ export type ProductType = {
   images: string[];
 };
 
+export type CartProductType = ProductType & { quantity: number };
+
 export type ProductStoreType = {
   loading: boolean;
   products: ProductType[];

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type ProductType = {
   id: number;
   title: string;
@@ -17,6 +19,6 @@ export type CartProductType = ProductType & { quantity: number };
 export type ProductStoreType = {
   loading: boolean;
   products: ProductType[];
-  error: null | unknown;
+  error: null | ReactNode;
   fetchProducts: () => void;
 };

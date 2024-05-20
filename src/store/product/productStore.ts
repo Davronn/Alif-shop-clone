@@ -1,3 +1,4 @@
+import { ProductStoreType } from "@/types/product.types";
 import axios from "axios";
 import { create } from "zustand";
 
@@ -27,6 +28,6 @@ const productStore = (set: any) => ({
   },
 });
 
-const useProductStore = create(productStore);
+const useProductStore = create<ProductStoreType>(productStore);
 
 export default useProductStore;

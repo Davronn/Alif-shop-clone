@@ -11,7 +11,7 @@ import { MdFavoriteBorder } from "react-icons/md";
 
 function Header({ onSearch }:{
   onSearch: (query: string) => void;
-}) {
+}): React.JSX.Element {
   const [cartCount, setCartCount] = useState(0);
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     onSearch(e.target.value);

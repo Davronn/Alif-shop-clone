@@ -1,14 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { BsCart2 } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
 import { FaBars } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 
-function Header() {
+
+
+function Header({ onSearch }:{
+  onSearch: (query: string) => void;
+}) {
   const [cartCount, setCartCount] = useState(0);
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    onSearch(e.target.value);
+  };
 
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
@@ -37,6 +44,7 @@ function Header() {
             className="border-yellow-500 rounded-s-xl border-2 border-solid py-[9px] px-3 focus:outline-none focus:border-yellow-500"
             type="text"
             placeholder="Search"
+            onChange={handleSearch}
           />
           <button className="bg-yellow-500 border-yellow-500  px-[18px] py-[10px] pt-[11px]  rounded-e-xl ">
             <CiSearch size={24} className="" />

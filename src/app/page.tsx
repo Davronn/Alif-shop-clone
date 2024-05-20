@@ -1,24 +1,23 @@
+// Home.tsx
 "use client";
-
-import EmblaCarousel from "@/components/courusel";
+import React, { useEffect, useState } from "react";
 import useProductStore from "@/store/product/productStore";
-import { CartProductType, ProductType } from "@/types/product.types";
-import React, { useEffect } from "react";
 import { EmblaOptionsType } from "embla-carousel";
+import { CartProductType, ProductType } from "@/types/product.types";
+import Header from "@/components/header";
+import EmblaCarousel from "@/components/courusel";
 
 function Home() {
   const { loading, products, fetchProducts, error } = useProductStore();
+  const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const TruncateText = ({
+  const TruncateText: React.FC<{ text: string; maxLength: number }> = ({
     text = "Text not provided",
     maxLength,
-  }: {
-    maxLength: number;
-    text: string;
   }) => {
     const truncatedText =
       text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
@@ -61,8 +60,23 @@ function Home() {
     console.log("add to card: " + product.id);
   };
 
+  const searchProducts = (query: string) => {
+    const filteredProducts = products.filter((product) => {
+      const searchInTitle = product.title
+        .toLowerCase()
+        .includes(query.toLowerCase());
+      const searchInDescription = product.description
+        .toLowerCase()
+        .includes(query.toLowerCase());
+      return searchInTitle || searchInDescription;
+    });
+
+    setFilteredProducts(filteredProducts);
+  };
+
   return (
     <div className="">
+      <Header onSearch={searchProducts} />
       <div className="links">
         <ul className="flex justify-center gap-9  mx-auto">
           <li className="cursor-pointer text-slate-500 border-white hover:border-slate-700 font-bold border-b-4 hover:border-b-4 py-2 ">
@@ -94,7 +108,8 @@ function Home() {
       {loading && <div>Loading...</div>}
       {error && <div>{error}</div>}
       <div className="flex flex-wrap justify-center gap-5 container">
-        {products.map((product: ProductType) => (
+        {(filteredProducts.length > 0 ? filteredProducts : products).map(
+          (product: ProductType) => (
           <div key={product.id}>
             <div className="">
               <div className="max-w-60 h-[488px] rounded overflow-hidden shadow-lg">

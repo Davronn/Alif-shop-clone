@@ -10,10 +10,10 @@ const productStore = (set: any) => ({
       set(() => ({
         loading: true,
       }));
-      const res = await axios.get("https://api.escuelajs.co/api/v1/products?offset=0&limit=20");
+      const res = await axios.get("https://dummyjson.com/products");
       const data = await res.data;
       set(() => ({
-        products: data,
+        products: data.products,
       }));
     } catch (err) {
       set(() => ({
